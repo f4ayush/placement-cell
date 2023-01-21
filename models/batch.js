@@ -1,5 +1,5 @@
-import { Schema, model } from 'mongoose'; 
-const batchSchema = new Schema({
+const mongoose = require('mongoose'); 
+const batchSchema = new mongoose.Schema({
     batch: {
         type: String,
         required: true,
@@ -15,5 +15,5 @@ const batchSchema = new Schema({
     timestamps: true
 });
 
-const Batch = new model("Batch", batchSchema);
-export default Batch;
+const Batch = new mongoose.model("Batch", batchSchema);
+module.exports = Batch;

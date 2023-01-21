@@ -5,12 +5,13 @@
     <section id="feed-posts">
             <h4>Posts</h4>
             <% if(locals.user){ %>
-            <form action="/posts/create" id="new-post-form" method="POST">
+            <form action="/students/create" id="new-post-form" method="POST">
                 <input type="text" placeholder="Name" name="name">
                 <input type="email" placeholder="Email" name="email" id="">
                 <input type="number" placeholder="Age" name="age">
                 <input type="text" placeholder="College" name="college" id="">
-                <input type="submit" value="Post">
+                <input type="text" placeholder="Status" name="status" id="">
+                <input type="submit" value="Submit">
             </form>
             <% } %>
         
