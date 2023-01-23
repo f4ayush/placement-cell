@@ -1,35 +1,28 @@
 <header id="layout-header">
-    <nav>
-        <div class="mini-logo">
-            <p>
-                <a href='/'>
-                    codeial
-                </a>
-            </p>
-        </div>
-    
-        <div class="auth-links">
+    <nav class="navbar bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand">Placement Cell</a>
+          <div class="d-flex auth-links">
             <ul>
                 <% if (locals.user){ %>
-                <li>
+                <li class="m-1">
                     <a href="/users/profile"><%= user.name %></a>
-                </li>
-                <li>
+                </li>   
+                <li class="m-1"
                     <a href="/users/sign-out">Sign Out</a>
                 </li>
                 <% }else{ %>
-                <li>
+                <li class="m-1">
                     <a href="/users/sign-in">Sign In</a>
                 </li>
-                <li>
+                <li class="m-1"
                     <a href="/users/sign-up">Sign Up</a>
                 </li>
         
                 <% } %>
             </ul>
         </div>
-    </nav>
- 
-
-
+      </nav>
 </header>
+
+

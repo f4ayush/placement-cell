@@ -15,7 +15,7 @@
                     let newPost = newPostDom(data.data.interview);
                     $('#posts-list-container>ul').prepend(newPost);
                     deletePost($('.delete-post-button', newPost));
-
+                    newPostForm[0].reset();
                     // call the create comment class
                     // new PostComments(data.data.post._id);
 

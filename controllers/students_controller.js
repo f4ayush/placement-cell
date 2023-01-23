@@ -19,8 +19,8 @@ module.exports.create = async function(req, res){
         
         if (req.xhr){
             // if we want to populate just the name of the user (we'll not want to send the password in the API), this is how we do it!
-            student = await student.populate('students', 'name').execPopulate();
-
+            // student = await student.populate('_id', 'name');
+            console.log(student)
             return res.status(200).json({
                 data: {
                     student: student
@@ -45,8 +45,8 @@ module.exports.create = async function(req, res){
 module.exports.interview = async function(req, res){
     console.log("s")
     try{
-        let student = await Student.findById(req.params.id).populate();
-        let interviews = await Interview.find({"studentId":student._id});
+        let student = await Student.findById(req.params.id);
+        let interviews = await Interview.find({"studentId":student._id}).populate('resultId');
         
         console.log(interviews)
         /* if (req.xhr){
@@ -84,7 +84,8 @@ module.exports.createInterview = async function(req, res){
             company: req.body.company,
             date: req.body.date
         });
-        
+        console.log(interview)
+        await Student.update({_id: req.body.studentId}, {$push:{interviews:interview._id}})
         if (req.xhr){
             // if we want to populate just the name of the user (we'll not want to send the password in the API), this is how we do it!
             // interview = await interview.populate('user', 'name').execPopulate();
@@ -111,7 +112,7 @@ module.exports.createInterview = async function(req, res){
 
 module.exports.updateResult = async function(req, res){
     try{
-        let result = await Result.update(
+        let result = await Result.findOneAndUpdate(
             { 
                 interviewId : req.body.interviewId
             },{
@@ -120,7 +121,16 @@ module.exports.updateResult = async function(req, res){
                 upsert: true 
             }
         );
-        
+
+        console.log(result);
+        let interview = await Interview.update(
+            { 
+                _id : req.body.interviewId
+            },{
+                resultId: result._id
+            }
+        );
+        console.log(interview);
         if (req.xhr){
             // if we want to populate just the name of the user (we'll not want to send the password in the API), this is how we do it!
             // interview = await interview.populate('user', 'name').execPopulate();

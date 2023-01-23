@@ -8,6 +8,10 @@ const interviewSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    resultId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Result'
+    },
     company: {
         type: String,
         required: true

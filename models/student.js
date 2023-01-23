@@ -17,6 +17,12 @@ const studentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    interviews:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Interview'
+        }
+    ],
     status: {
         type: String,
         enum: ["placed", "not_placed"],

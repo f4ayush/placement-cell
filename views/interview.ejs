@@ -21,26 +21,26 @@
                             <form action="students/interview-result" method="post">
                                 <input type="text" name="interviewId" value="<%= interview.id %>" hidden>
                             <select name="status" id="status">
-                                <% if(interview.result == "didnt_attempt" ){ %>
+                                <% if(interview.resultId?.result == "didnt_attempt" ){ %>
                                     <option selected value="didnt_attempt">Didn't Attempt</option>
                                 <% }else{ %>
-                                    <option selected value="didnt_attempt">Didn't Attempt</option>
+                                    <option value="didnt_attempt">Didn't Attempt</option>
                                 <% } %>
                                 
-                                <% if(interview.result == "pass" ){ %>
+                                <% if(interview.resultId?.result == "pass" ){ %>
                                     <option selected value="pass">Pass</option>
                                 <% }else{ %>
                                     <option value="pass">Pass</option>
                                 <% } %>
 
-                                <% if(interview.result == "fail" ){ %>
-                                    <option value="fail">Fail</option>
+                                <% if(interview.resultId?.result == "fail" ){ %>
+                                    <option selected value="fail">Fail</option>
                                 <% }else{ %>
                                     <option value="fail">Fail</option>
                                 <% } %>
 
-                                <% if(interview.result == "on_hold" ){ %>
-                                    <option value="on_hold">On Hold</option>
+                                <% if(interview.resultId?.result == "on_hold" ){ %>
+                                    <option selected value="on_hold">On Hold</option>
                                 <% }else{ %>
                                     <option value="on_hold">On Hold</option>
                                 <% } %>        
