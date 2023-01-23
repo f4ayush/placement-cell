@@ -3,26 +3,62 @@
 
 <div id="home-container">
     <section id="feed-posts">
-            <h4>Posts</h4>
             <% if(locals.user){ %>
+                
             <form action="/students/create" id="new-post-form" method="POST">
-                <input type="text" placeholder="Name" name="name">
-                <input type="email" placeholder="Email" name="email" id="">
+                
+                
+                <!-- <input type="email" placeholder="Email" name="email" id="">
                 <input type="number" placeholder="Age" name="age">
                 <input type="text" placeholder="College" name="college" id="">
                 <input type="text" placeholder="Status" name="status" id="">
-                <input type="submit" value="Submit">
+                <input type="submit" value="Submit"> -->
+                <div class="row d-flex">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Name" name="name" aria-label="First name">
+                    </div>
+                    <div class="col">
+                        <input type="email" class="form-control" placeholder="Email" name="email" aria-label="Email">
+                    </div>
+                    <div class="col">
+                        <input class="form-control" type="number" placeholder="Age" name="age" aria-label="Age">
+                    </div>
+                    <div class="col">
+                        <input class="form-control" type="text" placeholder="College" name="college" aria-label="College">
+                    </div>
+                    <div class="col">
+                        <input class="form-control" type="text" placeholder="Status" name="status" aria-label="status">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
             </form>
             <% } %>
         
             <div id="posts-list-container">
-                <ul>
-                    <% for(post of all_students){ %>
-                        
-                    <%- include('_post') -%>
-                        
-                    <%} %>
-                </ul>
+                <!-- <h5>Student Details</h5> -->
+                <table class="table" id="students-table">
+                    <thead>
+                        <tr>
+                          <% if (locals.user){ %>
+                            <th scope="col">#</th>
+                          <% } %>
+                          <th scope="col">Email</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Age</th>
+                          <th scope="col">College</th>
+                          <th scope="col">Placement Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(student of all_students){ %>
+                            
+                        <%- include('_student') -%>
+                            
+                        <%} %>
+                    <tbody>
+                </table>
             </div>
         </section>
 </div>

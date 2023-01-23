@@ -1,0 +1,13 @@
+<tr id="post-<%= student._id %>"> 
+    <% if (locals.user){ %>
+        <th scope="row">
+            <a class="delete-post-button"  href="/students/interview/<%= student.id %>">Set Interview</a>
+        </th>
+            
+    <% } %>
+    <td><%= student.email %></td>
+    <td><%= student.name %></td>
+    <td><%= student.age %></td>
+    <td><%= student.college %></td>
+    <td><%= student.status %></td>
+</tr>
