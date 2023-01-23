@@ -1,17 +1,14 @@
 const mongoose = require('mongoose'); 
 const resultSchema = new mongoose.Schema({
-    company: {
-        type: String,
-        required: true
-    },
-    studentId: {
-        type: Number,
+    interviewId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Interview',
         required: true
     },
     result: {
         type: String,
-        enum: ["PASS", "FAIL", "On Hold", "Didn’t Attempt"],
-        required: true
+        enum: ["pass", "fail", "on_hold", "didnt_attempt"],
+        default: "didnt_attempt"
     }
 }, {
     timestamps: true

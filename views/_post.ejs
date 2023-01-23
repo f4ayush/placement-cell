@@ -2,13 +2,13 @@
     <p>
         <% if (locals.user){ %>
         <small>
-            <a class="delete-post-button"  href="/students/destroy/<%= post.id %>">X</a>
+            <a class="delete-post-button"  href="/students/interview/<%= post.id %>">Interview</a>
         </small>
         <% } %>
         
         <br>
         <small>
-            <a href="/students/interview/<%= post.id %>""><%= post.email %></a>
+            <%= post.email %>
             <%= post.name %>
             <%= post.age %>
             <%= post.college %>
@@ -24,17 +24,6 @@
         </small>
 
     </p>
-    <div class="post-comments">
-        <% if (locals.user){ %>
-           
-
-        <% } %>
-
-        <div class="post-comments-list">
-            <ul id="post-comments-<%= post._id %>">
-                
-            </ul>
-        </div>
-    </div>
+    
     
 </li>

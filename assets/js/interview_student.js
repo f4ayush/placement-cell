@@ -8,18 +8,19 @@
 
             $.ajax({
                 type: 'post',
-                url: '/students/create',
+                url: '/students/interview-create',
                 data: newPostForm.serialize(),
                 success: function(data){
-                    let newPost = newPostDom(data.data.post);
+                    console.log(data)
+                    let newPost = newPostDom(data.data.interview);
                     $('#posts-list-container>ul').prepend(newPost);
-                    deletePost($(' .delete-post-button', newPost));
+                    deletePost($('.delete-post-button', newPost));
 
                     // call the create comment class
-                    new PostComments(data.data.post._id);
+                    // new PostComments(data.data.post._id);
 
                     // CHANGE :: enable the functionality of the toggle like button on the new post
-                    new ToggleLike($(' .toggle-like-button', newPost));
+                    // new ToggleLike($(' .toggle-like-button', newPost));
 
                     new Noty({
                         theme: 'relax',
@@ -39,75 +40,63 @@
 
 
     // method to create a post in DOM
-    let newPostDom = function(post){
+    let newPostDom = function(interview){
         // CHANGE :: show the count of zero likes on this post
-        return $(`<li id="post-${post._id}">
+        return $(`<li id="post-${interview._id}">
                     <p>
                         
                         <small>
-                            <a class="delete-post-button"  href="/posts/destroy/${ post._id }">X</a>
+                            <a class="delete-post-button"  href="/posts/destroy/${ interview.id }">X</a>
                         </small>
                        
-                        ${ post.content }
+                        ${ interview.company }
                         <br>
                         <small>
-                        ${ post.user.name }
+                        ${ interview.date }
                         </small>
                         <br>
-                        <small>
-                            
-                                <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">
-                                    0 Likes
-                                </a>
-                            
-                        </small>
+                       
 
                     </p>
-                    <div class="post-comments">
-                        
-                            <form id="post-${ post._id }-comments-form" action="/comments/create" method="POST">
-                                <input type="text" name="content" placeholder="Type Here to add comment..." required>
-                                <input type="hidden" name="post" value="${ post._id }" >
-                                <input type="submit" value="Add Comment">
-                            </form>
-               
-                
-                        <div class="post-comments-list">
-                            <ul id="post-comments-${ post._id }">
-                                
-                            </ul>
-                        </div>
-                    </div>
+                    <select name="status" id="status">
+                            <option selected value="didnt_attempt">Didn't Attempt</option>
+                            <option value="pass">Pass</option>
+                            <option value="fail">Fail</option>
+                            <option value="on_hold">On Hold</option>
+                    </select>
+                    <button>Save</button>
                     
                 </li>`)
     }
 
 
     // method to delete a post from DOM
-    /* let deletePost = function(deleteLink){
-        $(deleteLink).click(function(e){
+    let deletePost = function(updateResultForm){
+        updateResultForm.submit(function(e){
             e.preventDefault();
-
+            console.log(updateResultForm.serialize())
             $.ajax({
-                type: 'get',
-                url: $(deleteLink).prop('href'),
+                type: 'post',
+                url: '/students/interview-result',
+                data: updateResultForm.serialize(),
                 success: function(data){
-                    $(`#post-${data.data.post_id}`).remove();
+                    console.log(data)
+
                     new Noty({
                         theme: 'relax',
-                        text: "Post Deleted",
+                        text: "Post published!",
                         type: 'success',
                         layout: 'topRight',
                         timeout: 1500
                         
                     }).show();
-                },error: function(error){
+
+                }, error: function(error){
                     console.log(error.responseText);
                 }
             });
-
         });
-    } */
+    }
 
 
 
@@ -117,17 +106,16 @@
     let convertPostsToAjax = function(){
         $('#posts-list-container>ul>li').each(function(){
             let self = $(this);
-            let deleteButton = $(' .delete-post-button', self);
+            let deleteButton = $('form', self);
             deletePost(deleteButton);
 
             // get the post's id by splitting the id attribute
             let postId = self.prop('id').split("-")[1]
-            new PostComments(postId);
         });
     }
 
 
 
     createPost();
-    // convertPostsToAjax();
+    convertPostsToAjax();
 }

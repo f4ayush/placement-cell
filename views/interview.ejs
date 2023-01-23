@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="/css/home.css">
+
+<div id="home-container">
+    <section id="feed-posts">
+            <h4><%= student.name %></h4>
+            
+            <form action="/students/interview-create" id="new-post-form" method="POST">
+                <input type="text" name="studentId" id="student-id" hidden value="<%= student.id %>">
+                <input type="text" placeholder="Company" name="company" id="">
+                <input type="date" placeholder="Date" name="date" id="">
+                <input type="submit" value="Submit">
+            </form>
+            
+        
+            <div id="posts-list-container">
+                <ul>
+                    <% for(interview of interviews){ %>
+                        <li id="post-<%= interview.id %>">
+                            <p><%= interview.company %></p>
+                            <p><%= interview.date %></p>
+                            <form action="students/interview-result" method="post">
+                                <input type="text" name="interviewId" value="<%= interview.id %>" hidden>
+                            <select name="status" id="status">
+                                <% if(interview.result == "didnt_attempt" ){ %>
+                                    <option selected value="didnt_attempt">Didn't Attempt</option>
+                                <% }else{ %>
+                                    <option selected value="didnt_attempt">Didn't Attempt</option>
+                                <% } %>
+                                
+                                <% if(interview.result == "pass" ){ %>
+                                    <option selected value="pass">Pass</option>
+                                <% }else{ %>
+                                    <option value="pass">Pass</option>
+                                <% } %>
+
+                                <% if(interview.result == "fail" ){ %>
+                                    <option value="fail">Fail</option>
+                                <% }else{ %>
+                                    <option value="fail">Fail</option>
+                                <% } %>
+
+                                <% if(interview.result == "on_hold" ){ %>
+                                    <option value="on_hold">On Hold</option>
+                                <% }else{ %>
+                                    <option value="on_hold">On Hold</option>
+                                <% } %>        
+                            </select>
+                            <button>Save</button>
+                            </form>
+                        </li>
+                        
+                    <%} %>
+                </ul>
+            </div>
+        </section>
+</div>
+
+<!-- importing this script for creating the comments -->
+<script src="/js/interview_student.js"></script>
