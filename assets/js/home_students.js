@@ -1,7 +1,7 @@
 {   
     // method to submit the form data for new post using AJAX
     let createPost = function(){
-        let newPostForm = $('#new-post-form');
+        let newPostForm = $('#new-student-form');
 
         newPostForm.submit(function(e){
             e.preventDefault();
@@ -34,7 +34,6 @@
 
     // method to create a post in DOM
     let newPostDom = function(post){
-        // CHANGE :: show the count of zero likes on this post
         return $(`<tr id="post-<%= student._id %>"> 
         <th scope="row">
             <a class="delete-post-button"  href="/students/interview/${post._id}">Set Interview</a>

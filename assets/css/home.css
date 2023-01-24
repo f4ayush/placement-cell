@@ -8,3 +8,21 @@
     padding: 10px;
     border-left: 1px solid lightgrey;
     height: 100%; } */
+
+#home-container{
+  padding: 10px;
+}
+form > div{
+  width: 100%;
+}
+
+
+
+td > form{
+  display: flex;
+  /* justify-content: space-evenly; */
+}
+
+select{
+  width: fit-content !important;
+}

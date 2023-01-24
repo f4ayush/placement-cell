@@ -5,15 +5,9 @@
     <section id="feed-posts">
             <% if(locals.user){ %>
                 
-            <form action="/students/create" id="new-post-form" method="POST">
-                
-                
-                <!-- <input type="email" placeholder="Email" name="email" id="">
-                <input type="number" placeholder="Age" name="age">
-                <input type="text" placeholder="College" name="college" id="">
-                <input type="text" placeholder="Status" name="status" id="">
-                <input type="submit" value="Submit"> -->
-                <div class="row d-flex">
+            <form action="/students/create" id="new-student-form" method="POST">
+                <span>Create Student</span>
+                <div class="row mt-2 ">
                     <div class="col">
                         <input type="text" class="form-control" placeholder="Name" name="name" aria-label="First name">
                     </div>
@@ -34,10 +28,13 @@
                     </div>
                 </div>
             </form>
+            <hr>
             <% } %>
+
         
             <div id="posts-list-container">
                 <!-- <h5>Student Details</h5> -->
+                Students:
                 <table class="table" id="students-table">
                     <thead>
                         <tr>
@@ -57,13 +54,13 @@
                         <%- include('_student') -%>
                             
                         <%} %>
-                    <tbody>
+                    </tbody>
                 </table>
             </div>
         </section>
 </div>
 
 <!-- importing this script for creating the comments -->
-<script src="/js/home_posts.js"></script>
+<script src="/js/home_students.js"></script>
 
 

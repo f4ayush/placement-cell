@@ -1,58 +1,91 @@
 <link rel="stylesheet" href="/css/home.css">
 
 <div id="home-container">
-    <section id="feed-posts">
-            <h4><%= student.name %></h4>
-            
-            <form action="/students/interview-create" id="new-post-form" method="POST">
+    
+            <h4><span>Student: &nbsp;</span><%= student.name %></h4>
+            <hr>
+
+            <form id="new-post-form" class="row gy-2 gx-3 align-items-center">
+                <span>Schedule Interview</span>
                 <input type="text" name="studentId" id="student-id" hidden value="<%= student.id %>">
-                <input type="text" placeholder="Company" name="company" id="">
-                <input type="date" placeholder="Date" name="date" id="">
-                <input type="submit" value="Submit">
-            </form>
-            
+                <div class="col-auto">
+                  <label class="visually-hidden" for="autoSizingInputGroup">Email</label>
+                  <input type="text" class="form-control" placeholder="Company" name="company" id="autoSizingInput">
+                </div>
+                <div class="col-auto">
+                    <label class="visually-hidden" for="autoSizingInputGroup">Age</label>
+                    <input type="date" class="form-control" placeholder="Date" name="date" id="autoSizingInput">
+                </div>
+                
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form> 
+            <hr>
+          
         
-            <div id="posts-list-container">
-                <ul>
-                    <% for(interview of interviews){ %>
-                        <li id="post-<%= interview.id %>">
-                            <p><%= interview.company %></p>
-                            <p><%= interview.date %></p>
-                            <form action="students/interview-result" method="post">
-                                <input type="text" name="interviewId" value="<%= interview.id %>" hidden>
-                            <select name="status" id="status">
-                                <% if(interview.resultId?.result == "didnt_attempt" ){ %>
-                                    <option selected value="didnt_attempt">Didn't Attempt</option>
-                                <% }else{ %>
-                                    <option value="didnt_attempt">Didn't Attempt</option>
-                                <% } %>
-                                
-                                <% if(interview.resultId?.result == "pass" ){ %>
-                                    <option selected value="pass">Pass</option>
-                                <% }else{ %>
-                                    <option value="pass">Pass</option>
-                                <% } %>
+            <div id="result-list-container">
+                <table class="table" id="results-table">
+                    <thead>
+                        <tr>
+                          <th scope="col">Date</th>
+                          <th scope="col">Company</th>
+                          <th scope="col">Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% for(interview of interviews){
+                        let interviewDate = new Date(interview.date);
+                        const yyyy = interviewDate.getFullYear();
+                        let mm = interviewDate.getMonth() + 1;
+                        let dd = interviewDate.getDate();
 
-                                <% if(interview.resultId?.result == "fail" ){ %>
-                                    <option selected value="fail">Fail</option>
-                                <% }else{ %>
-                                    <option value="fail">Fail</option>
-                                <% } %>
+                        if (dd < 10) dd = '0' + dd;
+                        if (mm < 10) mm = '0' + mm;
 
-                                <% if(interview.resultId?.result == "on_hold" ){ %>
-                                    <option selected value="on_hold">On Hold</option>
-                                <% }else{ %>
-                                    <option value="on_hold">On Hold</option>
-                                <% } %>        
-                            </select>
-                            <button>Save</button>
-                            </form>
-                        </li>
+                        const formattedToday = dd + '/' + mm + '/' + yyyy; %>
+                        <tr id="post-<%= interview.id %>">
+                            <td><%= formattedToday %></td>
+                            <td><%= interview.company %></td>
+                            <td>
+                                <form action="students/interview-result" method="post">
+                                    <input type="text" name="interviewId" value="<%= interview.id %>" hidden>
+                                <select class="form-select" name="status" id="status">
+                                    <% if(interview.resultId?.result == "didnt_attempt" ){ %>
+                                        <option selected value="didnt_attempt">Didn't Attempt</option>
+                                    <% }else{ %>
+                                        <option value="didnt_attempt">Didn't Attempt</option>
+                                    <% } %>
+                                    
+                                    <% if(interview.resultId?.result == "pass" ){ %>
+                                        <option selected value="pass">Pass</option>
+                                    <% }else{ %>
+                                        <option value="pass">Pass</option>
+                                    <% } %>
+    
+                                    <% if(interview.resultId?.result == "fail" ){ %>
+                                        <option selected value="fail">Fail</option>
+                                    <% }else{ %>
+                                        <option value="fail">Fail</option>
+                                    <% } %>
+    
+                                    <% if(interview.resultId?.result == "on_hold" ){ %>
+                                        <option selected value="on_hold">On Hold</option>
+                                    <% }else{ %>
+                                        <option value="on_hold">On Hold</option>
+                                    <% } %>        
+                                </select>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                </form>
+                            </td>
+                            
+                        </tr>
                         
                     <%} %>
-                </ul>
+                </tbody>
+                    </table>
             </div>
-        </section>
+        
 </div>
 
 <!-- importing this script for creating the comments -->

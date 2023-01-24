@@ -49,7 +49,7 @@ module.exports.signUp = function(req, res){
 
 
     return res.render('user_sign_up', {
-        title: "Codeial | Sign Up"
+        title: "Placement Cell | Sign Up"
     })
 }
 
@@ -61,7 +61,7 @@ module.exports.signIn = function(req, res){
         return res.redirect('/users/profile');
     }
     return res.render('user_sign_in', {
-        title: "Codeial | Sign In"
+        title: "Placement Cell | Sign In"
     })
 }
 
