@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="/css/home.css">
-<link rel="stylesheet" href="/css/chat_box.css">
 
 <div id="home-container">
     <section id="feed-posts">
@@ -21,8 +20,27 @@
                         <input class="form-control" type="text" placeholder="College" name="college" aria-label="College">
                     </div>
                     <div class="col">
-                        <input class="form-control" type="text" placeholder="Status" name="status" aria-label="status">
+                        <select class="form-select" name="status" id="status">
+                            <option selected value="not_placed">Not Placed</option>
+                            <option selected value="placed">Placed</option>
+                        </select>
+                        <!-- <input class="form-control" type="text" placeholder="Status" name="status" aria-label="status"> -->
                     </div>
+                    </div>
+                    <div class="row mt-2 ">
+                    <div class="col">
+                        <input class="form-control" type="text" placeholder="Batch" name="batch" aria-label="batch">
+                    </div>
+                    <div class="col">
+                        <input class="form-control" type="text" placeholder="Web Dev Scores" name="webD" aria-label="webDScores">
+                    </div>
+                    <div class="col">
+                        <input class="form-control" type="text" placeholder="DSA Scores" name="dsa" aria-label="dsa">
+                    </div>
+                    <div class="col">
+                        <input class="form-control" type="text" placeholder="React Scores" name="react" aria-label="react">
+                    </div>
+                    
                     <div class="col">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>

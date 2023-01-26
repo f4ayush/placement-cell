@@ -28,9 +28,25 @@ const studentSchema = new mongoose.Schema({
         enum: ["placed", "not_placed"],
         required: true
     },
+    batch:{
+        type: String,
+        required: true
+    },dsa: {
+        type: Number,
+        required: true
+    },
+    webDevelopment: {
+        type: Number,
+        required: true
+    },
+    react: {
+        type: Number,
+        required: true
+    }
 }, {
     timestamps: true
 });
 
 const Student = new mongoose.model("Student", studentSchema);
+
 module.exports = Student;

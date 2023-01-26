@@ -6,6 +6,12 @@
             <ul>
                 <% if (locals.user){ %>
                 <li class="m-1">
+                    <a download="data.csv" href="/students/download-data">Download</a>
+                </li>
+                <li class="m-1">
+                    <a href="/jobs/job-list">Jobs</a>
+                </li>
+                <li class="m-1">
                     <span><%= user.name %></span>
                 </li>   
                 <li class="m-1">
