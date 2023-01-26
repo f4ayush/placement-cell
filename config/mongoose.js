@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const CONNECTION_URL = "mongodb+srv://placement-cell:ayush@cluster0.u1oivbj.mongodb.net/?retryWrites=true&w=majority";
+const CONNECTION_URL = process.env.CONNECTION_URL;
 mongoose.connect(CONNECTION_URL);
 
 const db = mongoose.connection;

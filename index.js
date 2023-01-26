@@ -1,8 +1,8 @@
-
+require('dotenv').config()
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const port = process.env.PORT || 8000;
 const app = express();
-const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 // used for session cookie
@@ -20,25 +20,11 @@ const customMware = require('./config/middleware');
 const mongoose = require('mongoose');
 
 
-
-
-const PORT = process.env.PORT || 5000;
-
-
-// app.use(sassMiddleware({
-//   src: './assets/scss',
-//   dest: './assets/css',
-//   debug: true,
-//   outputStyle: 'extended',
-//   prefix: '/css'
-// }));
 app.use(express.urlencoded());
 
 app.use(cookieParser());
 
 app.use(express.static('./assets'));
-// make the uploads path available to the browser
-// app.use('/uploads', express.static(__dirname + '/uploads'));
 
 app.use(expressLayouts);
 // extract style and scripts from sub pages into the layout
@@ -55,7 +41,6 @@ app.set('views', './views');
 // mongo store is used to store the session cookie in the db
 app.use(session({
   name: 'placement',
-  // TODO change the secret before deployment in production mode
   secret: 'blahsomething',
   saveUninitialized: false,
   resave: false,
